@@ -35,7 +35,7 @@
 
       var box = $(html);
 
-      //$('body').append(box);
+      $('body').append(box);
     }
 
     $('.article-share-box.on').hide();
