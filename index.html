@@ -157,7 +157,7 @@ ga('send', 'pageview');
   <div class="article-date">
     <i class="fa fa-calendar"></i>
     <a href="/2015/11/30/node-chat/">
-      <time datetime="2015-11-29T16:35:00.694Z" itemprop="datePublished">2015-11-30</time>
+      <time datetime="2015-11-29T16:40:48.467Z" itemprop="datePublished">2015-11-30</time>
     </a>
   </div>
 
@@ -173,7 +173,6 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-                
         <h1 id="対象">対象</h1><ul>
 <li>C言語とかは読める.</li>
 <li>Webページが、HTMLやらJavaScriptやらでできてることは分かる.</li>
@@ -182,69 +181,11 @@ ga('send', 'pageview');
 <p>ぐらいの人向けに書いていきたい.</p>
 <p>ちょうど大学入学時の自分ぐらいなので、その目線で.</p>
 <p>とりあえず、簡易チャットを作っていきます.</p>
-<h1 id="Node-jsとは">Node.jsとは</h1><p>JavaScriptといえば、Webページに動的に何かしたりするときに使うイメージですよね.</p>
-<p>でもjs便利なんじゃない？RubyとかPythonみたいな感じで使えたらよくない？</p>
-<h2 id="CommonJS">CommonJS</h2><p>ブラウザで動いているjsには、そもそもモジュールという概念とか、ファイル入出力がない(無くはない).</p>
-<p>Webブラウザから飛び出したjsにある程度仕様を決めよう！というのがCommonJSという概念</p>
-<p>そのCommonJS実装の1つがNode.js (完全に準拠してるわけではない)</p>
-<h1 id="Install">Install</h1><p>現在の最新安定版はv5.1.0です. この記事はこのバージョンでやっていきます.</p>
-<p>Node.jsは、最近諸事情によりバージョン変動が激しいので、なんかしらの不具合が出ることがあります.<br>おそらく、v0.12.7が一番安心できると思います. (それでも大丈夫です.)</p>
-<p>Windowsならnodistという使うバージョンを切り替えることができるツールが有ります.<br>Linux/OSXの人はnvmとか.</p>
-<h1 id="Hello,_World-">Hello, World.</h1><p>とりあえず世界にこんにちはします.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hello.js</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Hello, World!"</span>);</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node ./hello.js</span><br><span class="line">Hello, World!</span><br></pre></td></tr></table></figure>
-<p>C言語のように、main関数のようなエントリーポイントはなく、上から実行されます.<br>また、事前にコンパイルはせず、実行時に解釈されます。</p>
-<h2 id="ざっくりjs入門">ざっくりjs入門</h2><p>普通のjsのお話.</p>
-<h3 id="動的型付け">動的型付け</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"hello, "</span> + a + b); <span class="comment">//-&gt; hello, 23</span></span><br><span class="line"><span class="built_in">console</span>.log(a + b + <span class="string">", world!"</span>); <span class="comment">//-&gt; 5, world!</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> (<span class="string">"hello, "</span> + a)); <span class="comment">//-&gt; string</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> (a + b)); <span class="comment">//-&gt; number</span></span><br></pre></td></tr></table></figure>
-<p>変数宣言は<code>var</code>で、型の指定はありません. 全部<code>var</code>です.<br>宣言時に<code>var</code>を書かないとグローバル変数になります.<br>全部<code>var</code>とはいえ、型がないというわけではないです.<br>中で<code>string</code>とか<code>number</code>とかは持っています.</p>
-<h3 id="関数が第一級オブジェクト">関数が第一級オブジェクト</h3><p>C言語では、関数の引数に関数そのものを渡したりなど、変数と同様の扱いは出来なかったはずです.<br>jsではこんなことが出来ます.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 関数を引数の取る関数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hoge</span>(<span class="params">f</span>)</span>&#123;</span><br><span class="line">  f();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"po!"</span>);</span><br><span class="line">&#125;</span><br><span class="line">hoge(foo); <span class="comment">//-&gt; po!</span></span><br></pre></td></tr></table></figure>
-<p>まず、関数に名前をつける方法が2つあります.<br>個人的に<code>foo</code>のほうが「第一級オブジェクト感」があって、スコープも意識できるしいいかなぁと思います.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hoge</span>(<span class="params">f</span>)</span>&#123;</span><br><span class="line">  f();</span><br><span class="line">&#125;</span><br><span class="line">hoge(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"po!"</span>);</span><br><span class="line">&#125;); <span class="comment">//-&gt; po!</span></span><br></pre></td></tr></table></figure>
-<p>無名関数というのもあります. その名の通り、名前をつけない関数です.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"po!"</span>);</span><br><span class="line">&#125;)(); <span class="comment">//-&gt; po!</span></span><br></pre></td></tr></table></figure>
-<p>即時関数です. 名前を付けずに定義して即実行します.</p>
-<p>ブラウザjsだと大抵の場合コード全体をコレで囲いますが、変数名の衝突を防ぐためです.<br>Node.jsではしなくてもいいです.</p>
-<h3 id="Object">Object</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="number">3.5</span>,</span><br><span class="line">  c: &#123;</span><br><span class="line">    d: <span class="string">"hoge"</span>,</span><br><span class="line">    e: <span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123; <span class="keyword">return</span> <span class="string">"hoge"</span> + num; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj); <span class="comment">//-&gt; &#123; a: 1, b: 3.5, c: &#123; d: 'hoge', e: null &#125; &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.a); <span class="comment">//-&gt; 1</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.c.e(<span class="number">2</span>)); <span class="comment">//-&gt; hoge2</span></span><br></pre></td></tr></table></figure>
-<p>keyとvalueのペアで構成されます. 型を統一する必要はありません. ネストしても大丈夫です.</p>
-<p>なんとなく分かるよね？</p>
-<h3 id="クロージャー">クロージャー</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> counter = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> cnt = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> cnt++; &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log(counter()); <span class="comment">//-&gt; 0</span></span><br><span class="line"><span class="built_in">console</span>.log(counter()); <span class="comment">//-&gt; 1</span></span><br><span class="line"><span class="built_in">console</span>.log(counter()); <span class="comment">//-&gt; 2</span></span><br></pre></td></tr></table></figure>
-<p>関数内では、定義したスコープの変数を参照できます.</p>
-<p>さっきは触れませんでしたが、関数も当然返せます.<br><code>counter</code>は、即時関数の戻り値<code>function(){ return cnt++; }</code>です.</p>
-<p><code>counter</code> 関数を実際に実行しているスコープには変数<code>cnt</code>はないですが、<br>定義されたスコープにはありますね.<br>実行してみるとちゃんと参照できてるし、加算された結果も反映されてます.</p>
-<p>わかりにくいと思うかもしれないけど、結構便利.</p>
-<h2 id="非同期">非同期</h2><p>ブラウザのjsでもそうですが、非同期実行される関数があります.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// timer.js</span></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"second"</span>);</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"first"</span>);</span><br></pre></td></tr></table></figure>
-<p>firstと表示されてから3秒後にsecondと表示されたと思います.<br>普通なら、上から実行されるはずですよね？</p>
-<p><code>setTimeout</code>関数の第一引数に無名関数、第二引数に数字が渡されているのがわかると思います.</p>
-<p><code>setTimeout</code>関数は(第二引数)ミリ秒後に第一引数で渡した関数を<strong>非同期に</strong>実行します.<br>つまり、3秒後に実行することを登録したら、3秒間は待たずに、すぐ次の文<code>console.log(&quot;first&quot;);</code>に行ってしまいます.</p>
-<p>Nodeならではの例として、ファイル入出力に関わる標準モジュール<code>fs</code>を見てみましょう.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="comment">// txtファイル読み込み</span></span><br><span class="line">fs.readFile(<span class="string">"./hoge.txt"</span>, &#123;encoding: <span class="string">'utf8'</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, buf</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(buf);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"first"</span>);</span><br></pre></td></tr></table></figure>
-<p><code>fs.readFile</code> はファイル読み込みをする非同期関数です.<br>ファイル読み込みは、プログラムレベルで見ると時間がかかる処理です.<br>読み込みの完了を待たずに即座に返ることで、すぐに次の処理を行うことが出来ます.<br>それを実現しているのが上のコードです.</p>
-<p>第二引数のオブジェクトはオプションです.<br>デフォルトだとバイナリで読み込むので、utf8指定にします.</p>
-<p>第三引数は<code>コールバック関数</code>と呼ばれます.<br>非同期処理なので、処理の完了を待たずに次へ行ってしまいます.<br>せっかく読み込んだものを受け取るものがないと困りますよね？<br>その結果を受け取るのがコレです.<br>読み込みが完了し次第この関数を実行します.<br>Nodeの流儀として、第一引数が<code>Error</code>、第二引数が結果というものが多いです.</p>
-<p>引っかかりやすいのが、次のようにしてしまうパターンです.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* ダメな例 */</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="comment">// txtファイル読み込み</span></span><br><span class="line"><span class="keyword">var</span> buf = fs.readFile(<span class="string">"./hoge.txt"</span>, &#123;encoding: <span class="string">'utf8'</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, buf</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> buf;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(buf); <span class="comment">//-&gt; undefined</span></span><br></pre></td></tr></table></figure>
-<p>残念ながら、コールバック関数の戻り値を<code>fs.readFile</code>は返しません.<br>なぜなら、<code>fs.readFile</code>はコールバック関数の呼び出しを待たずに即座に返るからです.</p>
-<p>ちなみに、同期版である<code>fs.readFileSync</code>というものがあります.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="comment">// txtファイル読み込み</span></span><br><span class="line"><span class="keyword">var</span> buf = fs.readFileSync(<span class="string">"./hoge.txt"</span>, &#123;encoding: <span class="string">'utf8'</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(buf);</span><br></pre></td></tr></table></figure>
-<p>こちらは同期なので、コールバックが必要ありません.<br>状況によって使い分けるといいでしょう.</p>
-<p>標準モジュールの一覧はこちら</p>
-<p><a href="https://nodejs.org/api/" target="_blank" rel="external">Node.js v5.1.0 Documentation</a></p>
-<h3 id="コールバック地獄">コールバック地獄</h3><p>先程の例で、読み込んだファイルの内容を別のファイルに書き込みたい、というときはどうすればいいでしょうか.<br>読込結果はコールバック関数で受け取るので、その中で次の処理を書かなければなりません.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="comment">// txtファイル読み込み</span></span><br><span class="line">fs.readFile(<span class="string">"./hoge.txt"</span>, &#123;encoding: <span class="string">'utf8'</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, buf</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 本当はエラー処理した方がいい</span></span><br><span class="line">  fs.writeFile(<span class="string">"./hoge2.txt"</span>, buf, &#123;encoding: <span class="string">'utf8'</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"finish!"</span>);</span><br><span class="line">  &#125;);  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>コールバック関数の中に非同期関数が、さらにそのコールバックの中に…と続いていると、地獄が発生します.<br>これを俗に<code>コールバック地獄</code>といいます.</p>
-<p>これの対策はまたいつか.</p>
-<h2 id="HTTPサーバーを立てる">HTTPサーバーを立てる</h2><p>唐突ですが、とりあえず立ててみます.</p>
-<p>標準に<code>http</code>というモジュールがあるので、それを使います.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</span><br><span class="line">  res.end(<span class="string">'Hello World\n'</span>);</span><br><span class="line">&#125;).listen(<span class="number">3000</span>, <span class="string">'localhost'</span>);</span><br></pre></td></tr></table></figure>
-<p>ブラウザで<a href="localhost:3000" target="_blank" rel="external">localhost:3000</a>にアクセスしましょう.</p>
-<p>Hello, Worldと表示されたと思います.<br>(終了はCtrl+Cで)</p>
-<p>このコードは、ホスト<code>localhost</code>への<code>3000</code>番ポートへのアクセスがあったとき、<br>コールバック関数が呼ばれます.</p>
-<p>コールバックの中身はPlain Textの<code>&#39;Hello, World&#39;</code>を<br>アクセス元へ送るという処理をしています.</p>
-<p>長くなったので、ここらへんの詳しい話は次回に.</p>
-<p>(ゆるふわ記事と書いてありますが、ここおかしい！みたいなところはご指摘いただけると助かります)<br>(ここ分からない！とかも是非)</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2015/11/30/node-chat/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -378,7 +319,7 @@ ga('send', 'pageview');
             <div class="item-inner">
               <p class="item-category"><a class="article-category-link" href="/categories/nodejs/">nodejs</a></p>
               <p class="item-title"><a href="/2015/11/30/node-chat/" class="title">ゆるふわNode.js入門(1)</a></p>
-              <p class="item-date"><time datetime="2015-11-29T16:35:00.694Z" itemprop="datePublished">2015-11-30</time></p>
+              <p class="item-date"><time datetime="2015-11-29T16:40:48.467Z" itemprop="datePublished">2015-11-30</time></p>
             </div>
           </li>
         

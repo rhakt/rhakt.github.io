@@ -4,7 +4,7 @@
   <subtitle><![CDATA[po]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://rhakt.github.io/"/>
-  <updated>2015-11-29T16:35:00.694Z</updated>
+  <updated>2015-11-29T16:40:48.467Z</updated>
   <id>http://rhakt.github.io/</id>
   
   <author>
@@ -18,8 +18,8 @@
     <title><![CDATA[ゆるふわNode.js入門(1)]]></title>
     <link href="http://rhakt.github.io/2015/11/30/node-chat/"/>
     <id>http://rhakt.github.io/2015/11/30/node-chat/</id>
-    <published>2015-11-29T16:35:00.694Z</published>
-    <updated>2015-11-29T16:35:00.694Z</updated>
+    <published>2015-11-29T16:40:48.467Z</published>
+    <updated>2015-11-29T16:40:48.467Z</updated>
     <content type="html"><![CDATA[<h1 id="対象">対象</h1><ul>
 <li>C言語とかは読める.</li>
 <li>Webページが、HTMLやらJavaScriptやらでできてることは分かる.</li>
@@ -28,6 +28,7 @@
 <p>ぐらいの人向けに書いていきたい.</p>
 <p>ちょうど大学入学時の自分ぐらいなので、その目線で.</p>
 <p>とりあえず、簡易チャットを作っていきます.</p>
+<a id="more"></a>
 <h1 id="Node-jsとは">Node.jsとは</h1><p>JavaScriptといえば、Webページに動的に何かしたりするときに使うイメージですよね.</p>
 <p>でもjs便利なんじゃない？RubyとかPythonみたいな感じで使えたらよくない？</p>
 <h2 id="CommonJS">CommonJS</h2><p>ブラウザで動いているjsには、そもそもモジュールという概念とか、ファイル入出力がない(無くはない).</p>
@@ -97,7 +98,10 @@
 <li>Webページが、HTMLやらJavaScriptやらでできてることは分かる.</li>
 <li>ゲームとか作ったことあるけど、サーバーって何やってるの.</li>
 </ul>
-<p>ぐ]]>
+<p>ぐらいの人向けに書いていきたい.</p>
+<p>ちょうど大学入学時の自分ぐらいなので、その目線で.</p>
+<p>とりあえず、簡易チャットを作っていきます.</p>]]>
+    
     </summary>
     
       <category term="part1" scheme="http://rhakt.github.io/tags/part1/"/>
